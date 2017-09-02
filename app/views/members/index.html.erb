@@ -1,0 +1,36 @@
+<%= stylesheet_link_tag 'style' %>
+<p id="notice"><%= notice %></p>
+
+
+<center>
+<div style="margin-top: 100px" class="container">
+  <h1>Members</h1>
+  <div style="width: 960px"><%= link_to 'New Member', new_member_path, {:style=>'float:right'} %></div><br/>
+  <table style="max-width: 960px">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Relation</th>
+      <th style="text-align: center" colspan="3">Action</th>
+     
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td><%= member.relation %></td>
+        
+        <td style="text-align: center"><%= link_to 'Show', member %></td>
+        <td style="text-align: center"><%= link_to 'Edit', edit_member_path(member) %></td>
+        <td style="text-align: center"><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</center>
+<br>
+
+

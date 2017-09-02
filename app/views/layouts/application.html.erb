@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Finanzas201702</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <%= render 'shared/nav' %>
+  <div class="spacing"></div>
+    <%= yield %>
+    <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+  </body>
+
+  <style type="text/css">
+    .spacing{
+      margin-top: 100px;
+    }
+  </style>
+</html>

@@ -1,0 +1,94 @@
+<%= stylesheet_link_tag 'style' %>
+
+<p id="notice"><%= notice %></p>
+
+
+<div style="min-width: 960px; padding: 0px 50px 0px 50px;"  class="container">
+<div class="header">
+<span class="title"><%= @member.name %></span> <span class="subtitle"><%= @member.relation %></span>
+<div class="header_actions">
+<%= link_to 'Editar', edit_member_path(@member) %> |
+<%= link_to 'Agregar registro', new_entry_path %>
+</div>
+</div>
+<div class="table-container">
+	<div style="float: left">
+	<span style="float: left; font-size: 20px; margin-bottom: 10px">Egresos</span><br/>
+	<table class="table details_table left">
+		<thead>
+			<th>Detalle</th>
+			<th>Monto</th>
+			<th>Periodo</th>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	</div>
+	<div style="float: right">
+	<span style="float: left; font-size: 20px; margin-bottom: 10px">Ingresos</span><br/>
+	<table class="table details_table right">
+		<thead>
+			<th>Detalle</th>
+			<th>Monto</th>
+			<th>Periodo</th>
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	</div>
+</div>
+</div>
+<br/>
+<br/>
+<br/>
+
+
+
+<style type="text/css">
+	.header_actions{
+		float: right;
+    	margin-top: 45px;
+    	font-size: 16px;
+	}
+	.header_actions a{
+		color: gray;
+	}
+	.header_actions a:hover{
+		color: #428bca;
+		background: transparent;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.table-container{
+		margin-top: 50px;
+	}
+	.am{
+		width: 100%;
+		display: inline-block;
+	}
+	.details_table{
+
+		width: 500px;
+	}
+	.outcomes{
+		display: inline-block;
+	}
+	.incomes{
+		display: inline-block;
+	}
+	.left{
+		float: left
+	}
+	.right{
+		float: right
+	}
+
+	.fifty{
+		width: 50%
+	}
+	.full-width{
+		width: 100%
+	}
+</style>
