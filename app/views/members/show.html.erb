@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag 'style' %>
 
-<p id="notice"><%= notice %></p>
+
 
 
 <div style="min-width: 960px; padding: 0px 50px 0px 50px;"  class="container">
@@ -8,7 +8,7 @@
 <span class="title"><%= @member.name %></span> <span class="subtitle"><%= @member.relation %></span>
 <div class="header_actions">
 <%= link_to 'Editar', edit_member_path(@member) %> |
-<%= link_to 'Agregar registro', new_entry_path %>
+<a href="/entries/new?m=<%= @member.id %>">Agregar registro</a>
 </div>
 </div>
 <div class="table-container">
@@ -19,9 +19,26 @@
 			<th>Detalle</th>
 			<th>Monto</th>
 			<th>Periodo</th>
+			<th colspan="2">Actions</th>
 		</thead>
 		<tbody>
-			
+		<% if @outcome.count == 0 %>
+			<tr>
+      			<td colspan="4">No hay egresos</td>
+      		</tr>
+		<% end %>
+		<% @outcome.each do |i| %>
+
+      <tr>
+        <td><%= i.detail %></td>
+        <td><%= i.amount %></td>
+        <td><%= i.period %></td>
+        <td><%= link_to 'Edit', edit_entry_path(i) %></td>
+        <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+				
 		</tbody>
 	</table>
 	</div>
@@ -32,9 +49,24 @@
 			<th>Detalle</th>
 			<th>Monto</th>
 			<th>Periodo</th>
+			<th colspan="2">Actions</th>
 		</thead>
 		<tbody>
-			
+
+		<% if @income.count == 0 %>
+			<tr>
+      			<td style="text-align: center" colspan="4">No hay ingresos</td>
+      		</tr>
+		<% end %>
+	<% @income.each do |i| %>
+      <tr>
+        <td><%= i.detail %></td>
+        <td><%= i.amount %></td>
+        <td><%= i.period %></td>
+        <td><%= link_to 'Edit', edit_entry_path(i) %></td>
+        <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
 		</tbody>
 	</table>
 	</div>

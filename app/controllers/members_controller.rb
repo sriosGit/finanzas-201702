@@ -10,6 +10,8 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
+    @outcome = Entry.where(entry_type: 'outcome')
+    @income = Entry.where(entry_type: 'income')
   end
 
   # GET /members/new

@@ -14,6 +14,8 @@ class EntriesController < ApplicationController
 
   # GET /entries/new
   def new
+    @member = Member.find(params[:m])
+    @type = ['outcome', 'income']
     @entry = Entry.new
   end
 
@@ -28,7 +30,7 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
-        format.html { redirect_to @entry, notice: 'Entry was successfully created.' }
+        format.html { redirect_to Member.find(@entry.member_id), notice: 'Entry was successfully created.' }
         format.json { render :show, status: :created, location: @entry }
       else
         format.html { render :new }
@@ -54,9 +56,10 @@ class EntriesController < ApplicationController
   # DELETE /entries/1
   # DELETE /entries/1.json
   def destroy
+    member_id = @entry.member_id
     @entry.destroy
     respond_to do |format|
-      format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
+      format.html { redirect_to Member.find(member_id), notice: 'Entry was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +72,6 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      params.require(:entry).permit(:member_id, :amount, :entry_type)
+      params.require(:entry).permit(:member_id, :amount, :entry_type, :detail)
     end
 end
