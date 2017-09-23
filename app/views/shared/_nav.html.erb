@@ -1,24 +1,30 @@
-<!-- Fixed navbar -->
-        <nav id="header" class="navbar navbar-fixed-top">
-            <div id="header-container" class="container navbar-container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a id="brand" class="navbar-brand" style="cursor: default">Finanzas</a>
-                </div>
+
+        <nav style="padding: 20px" id="header" class="navbar navbar-fixed-top">
+            <div class="container-fluid">
                 <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
+                    <ul style="width: 100%" class="nav navbar-nav">
+                        <li><a style="font-size: 24px" href="/members">Finanzas</a></li>
                         <li class="active"><a href="/members">Miembros</a></li>
+                        <% if user_signed_in? %>
+                          <li style="float: right;">
+                          <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+                          </li>
+                        <% else %>
+                          <li style="float: right;">
+                          <%= link_to('Login', new_user_session_path)  %>  
+                          </li>
+                        <% end %>
                     </ul>
+
                 </div><!-- /.nav-collapse -->
             </div><!-- /.container -->
         </nav><!-- /.navbar -->
 
 <style>
+
+.active>a{
+    color: #428bca
+}
 
 .navbar-brand {
     font-size: 24px;
@@ -38,6 +44,8 @@
     background-color: #222;
     border-color: #080808;
     box-shadow: 0 0 5px rgba(0,0,0,.8);
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .navbar-brand.fixed-theme {

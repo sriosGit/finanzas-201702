@@ -1,10 +1,12 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+  
+      @members = Member.where(user_id: current_user.id)
+
   end
 
   # GET /members/1
@@ -27,7 +29,7 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
-
+    @member.user_id = current_user.id
     respond_to do |format|
       if @member.save
         format.html { redirect_to @member, notice: 'Member was successfully created.' }
