@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-	def login
+	def login 
 		@user = User.new
 	end
 end

@@ -1,0 +1,27 @@
+<%= form_with(model: afp, local: true) do |form| %>
+  <% if afp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(afp.errors.count, "error") %> prohibited this afp from being saved:</h2>
+
+      <ul>
+      <% afp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :afp_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :percentage %>
+    <%= form.text_field :percentage, id: :afp_percentage %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

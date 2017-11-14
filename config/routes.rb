@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :afps
   resources :entries
  
   devise_for :users

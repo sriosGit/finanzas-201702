@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @afp.description %>
+</p>
+
+<p>
+  <strong>Percentage:</strong>
+  <%= @afp.percentage %>
+</p>
+
+<%= link_to 'Edit', edit_afp_path(@afp) %> |
+<%= link_to 'Back', afps_path %>

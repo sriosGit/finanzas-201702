@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170904011228) do
+ActiveRecord::Schema.define(version: 20171011031050) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "afps", force: :cascade do |t|
+    t.string "description"
+    t.decimal "percentage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "entries", force: :cascade do |t|
     t.integer "member_id"
