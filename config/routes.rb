@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :relations
   resources :entry_types
   resources :rates
   resources :afps
