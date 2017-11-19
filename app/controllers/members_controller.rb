@@ -14,6 +14,7 @@ class MembersController < ApplicationController
   def show
     @outcome = Entry.where(entry_type: 'outcome')
     @income = Entry.where(entry_type: 'income')
+    @actual_van = get_van(params)
   end
 
   # GET /members/new
@@ -74,5 +75,20 @@ class MembersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
       params.require(:member).permit(:name, :relation, :user_id)
+    end
+
+    def get_van(params)
+      n = params[:n] || Date.today.month
+      sueldo = Entry.where(member_id: params[:member_id], entry_type: 'sueldo').sum(:amount)
+      income = Entry.where(member_id: params[:member_id], entry_type: 'ingreso').sum(:amount)
+      outcome = Entry.where(member_id: params[:member_id], entry_type: 'egreso').sum(:amount)
+
+      sumIncome = 0
+      if sueldo.nil? && income.nil? && outcome.nil?      
+        for i in 1..n
+          sumIncome += sueldo/((1+sueldo.tem)^i)
+        end
+        van = sumIncome - income + income
+      end
     end
 end

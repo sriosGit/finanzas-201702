@@ -15,7 +15,7 @@ class EntriesController < ApplicationController
   # GET /entries/new
   def new
     @member = Member.find(params[:m])
-    @type = ['outcome', 'income']
+    @type = ['sueldo', 'outcome', 'income']
     @entry = Entry.new
   end
 

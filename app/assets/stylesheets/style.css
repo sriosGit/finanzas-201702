@@ -23,3 +23,32 @@ input{
 .div50{
 	height: 50px
 }
+.details-table{
+
+}
+
+.subtitle{
+	font-size: 35px;
+	color: gray;
+}
+.title{
+	font-size: 70px;
+}
+table{
+	width: 100%;
+	border: 1px solid black;
+}
+td{
+	border: 1px solid black;
+	padding: 6px;
+}
+tr{
+	border: 1px solid 203575;
+	padding: 6px;
+}
+th{
+	background: #203575;
+	color: white;
+	padding: 6px;
+	font-weight: bold;
+}
