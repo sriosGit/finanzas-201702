@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119184122) do
+ActiveRecord::Schema.define(version: 20171119220532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20171119184122) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "rate", precision: 2
+    t.decimal "rate", precision: 7, scale: 4
   end
 
   create_table "entries", force: :cascade do |t|
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20171119184122) do
     t.datetime "updated_at", null: false
     t.integer "period"
     t.string "detail"
+    t.integer "entry_type"
+    t.integer "afp_id"
     t.index ["member_id"], name: "index_entries_on_member_id"
   end
 
@@ -48,9 +50,15 @@ ActiveRecord::Schema.define(version: 20171119184122) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
+  create_table "periods", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rates", force: :cascade do |t|
     t.string "description"
-    t.decimal "rate", precision: 2
+    t.decimal "rate", precision: 7, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

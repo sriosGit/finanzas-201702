@@ -15,7 +15,8 @@
     <% @afps.each do |afp| %>
       <tr>
         <td><%= afp.description %></td>
-        <td><%= afp.percentage %></td>
+        <td><%= afp.rate %></td>
+      
         <td><%= link_to 'Show', afp %></td>
         <td><%= link_to 'Edit', edit_afp_path(afp) %></td>
         <td><%= link_to 'Destroy', afp, method: :delete, data: { confirm: 'Are you sure?' } %></td>

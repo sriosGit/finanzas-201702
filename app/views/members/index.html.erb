@@ -18,7 +18,7 @@
     <% @members.each do |member| %>
       <tr>
         <td><%= member.name %></td>
-        <td><%= member.relation %></td>
+        <td><%= Relation.find(member.relation).description %></td>
         
         <td style="text-align: center"><%= link_to 'Show', member %></td>
         <td style="text-align: center"><%= link_to 'Edit', edit_member_path(member) %></td>

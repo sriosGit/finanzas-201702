@@ -13,6 +13,7 @@
   <tbody>
     <% @entry_types.each do |entry_type| %>
       <tr>
+        <td><%= entry_type.id %></td>
         <td><%= entry_type.description %></td>
         <td><%= link_to 'Show', entry_type %></td>
         <td><%= link_to 'Edit', edit_entry_type_path(entry_type) %></td>

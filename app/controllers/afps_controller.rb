@@ -25,7 +25,7 @@ class AfpsController < ApplicationController
   # POST /afps.json
   def create
     @afp = Afp.new(afp_params)
-
+    @afp.rate = @afp.rate.round(2)
     respond_to do |format|
       if @afp.save
         format.html { redirect_to @afp, notice: 'Afp was successfully created.' }
@@ -69,6 +69,6 @@ class AfpsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def afp_params
-      params.require(:afp).permit(:description, :percentage)
+      params.require(:afp).permit(:description, :rate)
     end
 end

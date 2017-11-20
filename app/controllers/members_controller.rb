@@ -12,18 +12,20 @@ class MembersController < ApplicationController
   # GET /members/1
   # GET /members/1.json
   def show
-    @outcome = Entry.where(entry_type: 'outcome')
-    @income = Entry.where(entry_type: 'income')
-    @actual_van = get_van(params)
+    @outcome = Entry.where(entry_type: [2,4,5], member_id: params[:id])
+    @income = Entry.where(entry_type: [1,3], member_id: params[:id])
+    #@actual_van = get_van(params)
   end
 
   # GET /members/new
   def new
     @member = Member.new
+    @relations = Relation.all
   end
 
   # GET /members/1/edit
   def edit
+    @relations = Relation.all
   end
 
   # POST /members
@@ -78,17 +80,17 @@ class MembersController < ApplicationController
     end
 
     def get_van(params)
-      n = params[:n] || Date.today.month
-      sueldo = Entry.where(member_id: params[:member_id], entry_type: 'sueldo').sum(:amount)
-      income = Entry.where(member_id: params[:member_id], entry_type: 'ingreso').sum(:amount)
-      outcome = Entry.where(member_id: params[:member_id], entry_type: 'egreso').sum(:amount)
+      #n = params[:n] || Date.today.month
+      #sueldo = Entry.where(member_id: params[:member_id], entry_type: 'sueldo').sum(:amount)
+      #income = Entry.where(member_id: params[:member_id], entry_type: 'ingreso').sum(:amount)
+      #outcome = Entry.where(member_id: params[:member_id], entry_type: 'egreso').sum(:amount)
 
-      sumIncome = 0
-      if sueldo.nil? && income.nil? && outcome.nil?      
-        for i in 1..n
-          sumIncome += sueldo/((1+sueldo.tem)^i)
-        end
-        van = sumIncome - income + income
-      end
+      #sumIncome = 0
+      #if sueldo.nil? && income.nil? && outcome.nil?      
+      #  for i in 1..n
+      #    sumIncome += sueldo/((1+sueldo.tem)^i)
+      #  end
+      #  van = sumIncome - income + income
+      #end
     end
 end

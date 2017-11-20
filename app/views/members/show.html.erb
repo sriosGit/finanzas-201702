@@ -5,7 +5,7 @@
 
 <div style="min-width: 960px; padding: 0px 50px 0px 50px;"  class="container">
 <div class="header">
-<span class="title"><%= @member.name %></span> <span class="subtitle"><%= @member.relation %></span>
+<span class="title"><%= @member.name %></span> <span class="subtitle"><%= Relation.find(@member.relation).description %></span>
 <div class="header_actions">
 <%= link_to 'Editar', edit_member_path(@member) %> |
 <a href="/entries/new?m=<%= @member.id %>">Agregar registro</a>
@@ -25,15 +25,15 @@
 		<tbody>
 		<% if @outcome.count == 0 %>
 			<tr>
-      			<td colspan="4">No hay egresos</td>
+      			<td style="text-align: center"  colspan="4">No hay egresos</td>
       		</tr>
 		<% end %>
 		<% @outcome.each do |i| %>
 
       <tr>
         <td><%= i.detail %></td>
-        <td><%= i.amount %></td>
-        <td><%= i.period %></td>
+        <td><%= i.amount.round(2) %></td>
+        <td><%= Period.find(i.period).description %></td>
         <td><%= link_to 'Edit', edit_entry_path(i) %></td>
         <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -62,9 +62,9 @@
 	<% @income.each do |i| %>
       <tr>
         <td><%= i.detail %></td>
-        <td><%= i.amount %></td>
-        <td><%= i.period %></td>
-        <td><%= link_to 'Edit', edit_entry_path(i) %></td>
+        <td><%= i.amount.round(2) %></td>
+        <td><%= Period.find(i.period).description %></td>
+        <td><%= link_to 'Edit', edit_entry_path(i, :m => params[:id]) %></td>
         <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

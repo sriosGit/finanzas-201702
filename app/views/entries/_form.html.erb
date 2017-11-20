@@ -28,10 +28,32 @@
 
   <div class="field">
     <%= form.label :entry_type %>
-    <%= form.select :entry_type, @type %>
+    <%= form.select(:entry_type, @type.map { |r| [ r.description , r.id ] }, {}, :id => "entry_type") %>
+  </div>  
+
+  <div id="salary_options" class="field hidden">
+    <%= form.label :afp_id %>
+    <%= form.select(:afp_id,@afps.map { |r| [ r.description , r.id ] }) %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :period %>
+    <%= form.select(:period, @period.map { |r| [ r.description , r.id ] }) %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $('#entry_type').change(function(){
+    if($('#entry_type').val() == 3 ){
+      $('#salary_options').removeClass( "hidden" )
+    }
+    //if ($('entry[entry_type]').value()=="Sueldo"){
+    //  
+    //}
+  })
+</script>

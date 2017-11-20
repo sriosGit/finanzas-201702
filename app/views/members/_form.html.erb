@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :relation %>
-    <%= form.text_field :relation, id: :member_relation %>
+    <%= form.select(:relation, @relations.map { |r| [ r.description , r.id ] }) %>
   </div>
 
   <div class="actions">
