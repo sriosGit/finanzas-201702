@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119220532) do
+ActiveRecord::Schema.define(version: 20171120214502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171119220532) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "savings", precision: 2
+    t.decimal "savings", precision: 7, scale: 2
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20171119220532) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "rate", precision: 7, scale: 2
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

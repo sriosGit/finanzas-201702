@@ -2,6 +2,7 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
+  <div class="hidden">  <%= @rates = Rate.all %></div>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -11,7 +12,7 @@
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> characters minimum :v)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
@@ -19,6 +20,11 @@
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rate %><br />
+    <%= f.select(:rate, @rates.map { |r| [ r.description+ ' - '+r.rate.to_s + '%' , r.id ] }) %>
   </div>
 
   <div class="actions">

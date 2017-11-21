@@ -4,16 +4,30 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-  
       @members = Member.where(user_id: current_user.id)
-
   end
 
   # GET /members/1
   # GET /members/1.json
   def show
-    @outcome = Entry.where(entry_type: [2,4,5], member_id: params[:id])
-    @income = Entry.where(entry_type: [1,3], member_id: params[:id])
+    @outcome = Entry.where(entry_type: [2], member_id: params[:id])
+    @income = Entry.where(entry_type: [1], member_id: params[:id])
+    @salary = Entry.where(entry_type: 3, member_id: params[:id])
+    member = Member.find(params[:id])
+    salary_monies = @salary.sum(:amount)
+    var = @income.sum(:amount)- @outcome.sum(:amount)
+    savings = member.savings
+    @anual_savings = []
+    @anual_savings << savings
+
+    for i in 2..12
+      if i == 7 || i == 12
+        savings = savings*((1+Rate.find(current_user.rate).rate/100.00)**(1.00/12.00)) + salary_monies*2 + var
+      else
+        savings = savings*((1+Rate.find(current_user.rate).rate/100.00)**(1.00/12.00)) + salary_monies + var
+      end
+      @anual_savings << savings.round(2)
+    end
     #@actual_van = get_van(params)
   end
 
@@ -76,7 +90,7 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :relation, :user_id)
+      params.require(:member).permit(:name, :relation, :user_id, :savings)
     end
 
     def get_van(params)
