@@ -16,7 +16,7 @@
 		<thead>
 			<th>Mes</th>
 			<th>Ahorro</th>
-			<th>Tasa: <%=select_tag "rates", options_from_collection_for_select(@rates, "id", "rate", params[:r] || Rate.first.id), class: 'black' %></th>
+			<th><div style="float: right">Tasa: <%=select_tag "rates", options_from_collection_for_select(@rates, "id", "rate", params[:r] || Rate.first.id), class: 'black' %>% <span style="color: white"> - <%=Rate.find(params[:r]||Rate.first.id).description%></span></div></th>
 		</thead>
 		<tbody id="contracted">
 			<tr >
