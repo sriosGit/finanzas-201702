@@ -103,6 +103,8 @@ class MembersController < ApplicationController
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
+
+    Entry.where(member_id: @member.id).destroy_all
     @member.destroy
     respond_to do |format|
       format.html { redirect_to members_url, notice: 'Member was successfully destroyed.' }
