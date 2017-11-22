@@ -85,7 +85,6 @@
       <tr>
         <td><%= i.detail %></td>
         <td><%= i.amount.round(2) %></td>
-        <td><%= Period.find(i.period).description %></td>
         <td><%= link_to 'Edit', edit_entry_path(i, :m => params[:id]) %></td>
         <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -94,7 +93,6 @@
       <tr>
         <td><%= i.detail %></td>
         <td><%= i.amount.round(2) %></td>
-        <td><%= Period.find(i.period).description %></td>
         <td><%= link_to 'Edit', edit_entry_path(i, :m => params[:id]) %></td>
         <td><%= link_to 'Destroy', i, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
