@@ -37,11 +37,6 @@
   </div>
 
 
-  <div class="field">
-    <%= form.label "Periodo: ", class: "white" %>
-    <%= form.select(:period, @period.map { |r| [ r.description , r.id ] }) %>
-  </div>
-
   <div class="actions">
     <%= form.submit %>
   </div>
