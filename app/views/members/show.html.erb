@@ -16,21 +16,22 @@
 		<thead>
 			<th>Mes</th>
 			<th>Ahorro</th>
+			<th>Tasa: <%=select_tag "rates", options_from_collection_for_select(@rates, "id", "rate", params[:r] || Rate.first.id), class: 'black' %></th>
 		</thead>
 		<tbody id="contracted">
 			<tr >
-				<td colspan="2"  style="text-align: center"><a onclick="expandSavings()">Expandir</a></td>
+				<td colspan="3"  style="text-align: center"><a onclick="expandSavings()">Expandir</a></td>
 			</tr>
 		</tbody>
 		<tbody id="expanded" class="hidden">
 			<% for i in 1..12 %>
 				<tr>
 					<td><%= i %></td>
-					<td><%= @anual_savings[i-1] %></td>				
+					<td colspan="2"><%= @anual_savings[i-1] %></td>				
 				</tr>
 			<% end %>
 			<tr>
-				<td  colspan="2" style="text-align: center"><a onclick="contractSavings()">Contraer</a></td>
+				<td  colspan="3" style="text-align: center"><a onclick="contractSavings()">Contraer</a></td>
 			</tr>		
 		</tbody>
 	</table>
@@ -118,6 +119,11 @@
 		$('#contracted').removeClass('hidden')
 		$('#expanded').addClass('hidden')
 	}
+
+	$('#rates').change(function(){
+		window.location.href = "<%members_path( @member.id )%>?r=" + $('#rates').val()
+	})
+
 </script>
 
 <style type="text/css">

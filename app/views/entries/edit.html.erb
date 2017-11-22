@@ -1,6 +1,9 @@
-<h1>Editing Entry</h1>
+
+<center>
+<div class="form-container">
+<h1 style="color: white">Editar entrada</h1>
 
 <%= render 'form', entry: @entry %>
-
-<%= link_to 'Show', @entry %> |
-<%= link_to 'Back', entries_path %>
+</div>
+<%= link_to 'Regresar', members_path(@member.id)  %>
+</center>

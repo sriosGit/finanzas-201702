@@ -5,6 +5,9 @@
                     <ul style="width: 100%" class="nav navbar-nav">
                         <li><a style="font-size: 24px" href="/members">Finanzas</a></li>
                         <li class="active"><a href="/members">Miembros</a></li>
+                        <li class="active"><a href="/afps">AFP</a></li>
+                        <li class="active"><a href="/relations">Relaciones</a></li>
+                        <li class="active"><a href="/rates">Tasas</a></li>
                         <% if user_signed_in? %>
                           <li style="float: right;">
                           <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        

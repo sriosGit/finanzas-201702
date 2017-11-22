@@ -13,12 +13,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :detail %>
+    <%= form.label "Detalle: ", class: "white" %>
     <%= form.text_field :detail, id: :entry_detail %>
   </div>
 
   <div class="field">
-    <%= form.label :amount %>
+    <%= form.label "Monto: ", class: "white" %>
     <%= form.text_field :amount, id: :entry_amount %>
   </div>
 
@@ -27,18 +27,18 @@
   </div>
 
   <div class="field">
-    <%= form.label :entry_type %>
+    <%= form.label "Tipo entrada: ", class: "white" %>
     <%= form.select(:entry_type, @type.map { |r| [ r.description , r.id ] }, {}, :id => "entry_type") %>
   </div>  
 
   <div id="salary_options" class="field hidden">
-    <%= form.label :afp_id %>
+    <%= form.label "AFP: ", class: "white" %>
     <%= form.select(:afp_id,@afps.map { |r| [ r.description , r.id ] }) %>
   </div>
 
 
   <div class="field">
-    <%= form.label :period %>
+    <%= form.label "Periodo: ", class: "white" %>
     <%= form.select(:period, @period.map { |r| [ r.description , r.id ] }) %>
   </div>
 

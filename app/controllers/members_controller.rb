@@ -4,8 +4,35 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-      @members = Member.where(user_id: current_user.id)
+    @members = Member.where(user_id: current_user.id)
+    @rates = Rate.all
+    @family_savings = []
+    for i in 1..12
+      @family_savings[i-1] = 0
+    end
+    @members.each do |m|
+      
+      @outcome = Entry.where(entry_type: 2, member_id: m.id)
+      @income = Entry.where(entry_type: 1, member_id:  m.id)
+      @salary = Entry.where(entry_type: 3, member_id:  m.id) || 0.00
+      
+      rate_id = params[:r] || Rate.first.id
+      salary_monies = @salary.sum(:amount)
+      var = @income.sum(:amount)- @outcome.sum(:amount)
+      savings = m.savings || 0
+      @family_savings[0] += savings
+     
+      for i in 2..12
+        if i == 7 || i == 12
+          savings = savings*((1+Rate.find(rate_id).rate/100.00)**(1.00/12.00)) + salary_monies*2 + var
+        else
+          savings = savings*((1+Rate.find(rate_id).rate/100.00)**(1.00/12.00)) + salary_monies + var
+        end
+        @family_savings[i-1] += savings.round(2)
+      end
+    end
   end
+
 
   # GET /members/1
   # GET /members/1.json
@@ -13,22 +40,23 @@ class MembersController < ApplicationController
     @outcome = Entry.where(entry_type: [2], member_id: params[:id])
     @income = Entry.where(entry_type: [1], member_id: params[:id])
     @salary = Entry.where(entry_type: 3, member_id: params[:id])
+    @rates = Rate.all 
+    rate_id = params[:r]|| Rate.first.id
     member = Member.find(params[:id])
     salary_monies = @salary.sum(:amount)
     var = @income.sum(:amount)- @outcome.sum(:amount)
-    savings = member.savings
+    savings = member.savings || 0
     @anual_savings = []
     @anual_savings << savings
 
     for i in 2..12
       if i == 7 || i == 12
-        savings = savings*((1+Rate.find(current_user.rate).rate/100.00)**(1.00/12.00)) + salary_monies*2 + var
+        savings = savings*((1+Rate.find(rate_id).rate/100.00)**(1.00/12.00)) + salary_monies*2 + var
       else
-        savings = savings*((1+Rate.find(current_user.rate).rate/100.00)**(1.00/12.00)) + salary_monies + var
+        savings = savings*((1+Rate.find(rate_id).rate/100.00)**(1.00/12.00)) + salary_monies + var
       end
       @anual_savings << savings.round(2)
     end
-    #@actual_van = get_van(params)
   end
 
   # GET /members/new

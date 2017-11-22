@@ -20,6 +20,9 @@ input{
 .white{
 	color: white !important;
 }
+.black{
+	color: black !important;
+}
 .div50{
 	height: 50px
 }
