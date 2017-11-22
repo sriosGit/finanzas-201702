@@ -18,6 +18,32 @@ class EntriesController < ApplicationController
     @period = Period.all
     @entry = Entry.new
     @afps = Afp.all
+
+    @family_savings = []
+    for i in 1..12
+      @family_savings[i-1] = 0
+    end
+    Member.all.each do |m|
+      
+      @outcome = Entry.where(entry_type: 2, member_id: m.id)
+      @income = Entry.where(entry_type: 1, member_id:  m.id)
+      @salary = Entry.where(entry_type: 3, member_id:  m.id) || 0.00
+      
+      rate_id = params[:r] || Rate.first.id
+      salary_monies = @salary.sum(:amount)
+      var = @income.sum(:amount)- @outcome.sum(:amount)
+      savings = m.savings || 0
+      @family_savings[0] += savings
+     
+      for i in 2..12
+        if i == 7 || i == 12
+          savings = savings*((1+Rate.find(rate_id).rate/100.00)**(1.00/12.00)) + salary_monies*2 + var
+        else
+          savings = savings*((1+Rate.find(rate_id).rate/100.00)**(1.00/12.00)) + salary_monies + var
+        end
+        @family_savings[i-1] += savings.round(2)
+      end
+    end
   end
 
   # GET /entries/1/edit

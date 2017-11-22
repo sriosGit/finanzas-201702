@@ -19,8 +19,12 @@
 
   <div class="field">
     <%= form.label "Monto: ", class: "white" %>
-    <%= form.text_field :amount, id: :entry_amount %>
+    <%= form.text_field :amount, id: :entry_amount %> <br/>
+    <span class="hidden" id="notice" style="color: red">El saldo seria negativo. No puedes gastar lo que no tienes</span>
   </div>
+
+
+
 
   <div class="field">
     <%= form.hidden_field(:member_id, :value => params[:m]) %>
@@ -56,4 +60,33 @@
     //  
     //}
   })
+
+  $("#entry_amount").on("change paste keyup", function() {
+    var savings_0 = "<% @family_savings[0]%>"
+      if($('#entry_type').val() == 2 ){
+         savings_0 -= parseFloat($('#entry_amount').val())
+        if(savings_0 < 0){
+          $("#notice").removeClass("hidden")
+          $(':input[type="submit"]').prop('disabled', true);
+        }else{
+          $("#notice").addClass("hidden")
+          $(':input[type="submit"]').prop('enabled', false);
+        }
+      }
+  });
+  $("#entry_type").on("change paste keyup", function() {
+    var savings_0 = "<% @family_savings[0]%>"
+      if($('#entry_type').val() == 2 ){
+         savings_0 -= parseFloat($('#entry_amount').val())
+        if(savings_0 < 0){
+          $("#notice").removeClass("hidden")
+          $(':input[type="submit"]').prop('disabled', true);
+        }else{
+          $("#notice").addClass("hidden")
+          $('input[type="submit"]').prop('enabled', false);
+        }
+      }
+      
+  });
+  
 </script>
