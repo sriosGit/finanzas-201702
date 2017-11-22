@@ -21,10 +21,6 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="field">
-    <%= f.label :rate %><br />
-    <%= f.select(:rate, @rates.map { |r| [ r.description+ ' - '+r.rate.to_s + '%' , r.id ] }) %>
-  </div>
 
   <div class="actions">
     <%= f.submit "Sign up" %>
