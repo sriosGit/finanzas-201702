@@ -29,6 +29,9 @@ input{
 .details-table{
 
 }
+.pull-right{
+	float: right
+}
 
 .subtitle{
 	font-size: 35px;
