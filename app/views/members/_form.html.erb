@@ -21,10 +21,11 @@
     <%= form.select(:relation, @relations.map { |r| [ r.description , r.id ] }) %>
   </div>
 
- <div class="field">
+  <div class="field">
      <%= form.label 'Ahorro inicial: ', class: "white" %>
     <%= form.text_field :savings, id: :memeber_savings %>
   </div>
+  
   <div class="actions">
     <%= form.submit %>
   </div>
